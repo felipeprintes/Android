@@ -8,6 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.util.List;
+
+import br.com.agendaaluno.cursoandroid.agendaaluno.dao.AlunoDAO;
+import br.com.agendaaluno.cursoandroid.agendaaluno.modelo.Aluno;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,10 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] alunos = {"Daniel", "Ronaldo", "Bruno", "Gustavo","Daniel", "Ronaldo", "Bruno", "Gustavo","Daniel", "Ronaldo", "Bruno", "Gustavo"};
-        ListView listaAlunos  = (ListView) findViewById(R.id.lista_alunos);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alunos);
-        listaAlunos.setAdapter(adapter);
+
 
         Button novoAluno = (Button) findViewById(R.id.novo_aluno);
         novoAluno.setOnClickListener(new View.OnClickListener() {
@@ -29,5 +31,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void carregaLista() {
+        AlunoDAO dao = new AlunoDAO(this);
+        List<Aluno> alunos = dao.buscaAlunos();
+        dao.close();
+
+        ListView listaAlunos  = (ListView) findViewById(R.id.lista_alunos);
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        listaAlunos.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaLista();
     }
 }

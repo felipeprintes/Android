@@ -15,15 +15,14 @@ public class FormularioHelper {
     private final EditText campoEndereco;
     private final EditText campoSite;
     private final RatingBar campoNota;
+    private final EditText campoTelefone;
 
     public FormularioHelper(FormularioActivity activity){
         campoNome = (EditText) activity.findViewById(R.id.form_nome);
         campoEndereco = (EditText) activity.findViewById(R.id.form_endereco);
+        campoTelefone = (EditText) activity.findViewById(R.id.form_telefone);
         campoSite = (EditText) activity.findViewById(R.id.form_site);
         campoNota = (RatingBar) activity.findViewById(R.id.form_nota);
-
-
-
     }
 
     public Aluno pegaAluno() {
@@ -31,6 +30,7 @@ public class FormularioHelper {
         Aluno aluno = new Aluno();
         aluno.setNome(campoNome.getText().toString());
         aluno.setEndereco(campoEndereco.getText().toString());
+        aluno.setTelefone(campoTelefone.getText().toString());
         aluno.setSite(campoSite.getText().toString());
         aluno.setNota(Double.valueOf(campoNota.getProgress()));
 

@@ -21,6 +21,12 @@
             android:id="@+id/form_endereco"/>
 
         <EditText
+            android:hint="Telefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/form_telefone"/>
+
+        <EditText
             android:hint="Site"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

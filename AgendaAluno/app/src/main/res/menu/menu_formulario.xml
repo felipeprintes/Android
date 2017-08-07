@@ -4,7 +4,8 @@
 
     <item android:id="@+id/menu_ok"
         android:title="ok"
-        android:icon="@drawable/fundo"/>
+        android:icon="@drawable/ic_confirmar"
+        app:showAsAction="always"/>
 
 
 

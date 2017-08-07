@@ -32,11 +32,5 @@
             android:numStars="5"
             android:max="10"
             android:id="@+id/form_nota"/>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar"
-            android:id="@+id/form_salvar"/>
     </LinearLayout>
 </ScrollView>

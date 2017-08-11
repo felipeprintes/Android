@@ -1,5 +1,6 @@
 package br.com.agendaaluno.cursoandroid.agendaaluno;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -19,7 +20,14 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-         helper = new FormularioHelper(this);
+        helper = new FormularioHelper(this);
+
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+
+        if(aluno != null){
+            helper.preencheFormulario(aluno);
+        }
 
     }
 
@@ -40,7 +48,12 @@ public class FormularioActivity extends AppCompatActivity {
 
                 Aluno aluno = helper.pegaAluno();
                 AlunoDAO dao = new AlunoDAO(this);
-                dao.insere(aluno);
+
+                if(aluno.getId()!=null){
+                    dao.altera(aluno);
+                }else{
+                    dao.insere(aluno);
+                }
                 dao.close();
 
                 Toast.makeText(FormularioActivity.this, "Aluno"+ aluno.getNome() + "salvo", Toast.LENGTH_SHORT).show();

@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> lista, View item, int position, long l) {
                 Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(position);
-                Toast.makeText(MainActivity.this, "Aluno " + aluno.getNome() + " clicado!", Toast.LENGTH_SHORT).show();
+                Intent vaiProFormulario = new Intent(MainActivity.this, FormularioActivity.class);
+                vaiProFormulario.putExtra("aluno", aluno);
+                startActivity(vaiProFormulario);
             }
         });
 

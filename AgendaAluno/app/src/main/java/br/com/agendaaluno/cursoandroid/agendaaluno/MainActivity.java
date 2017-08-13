@@ -1,6 +1,7 @@
 package br.com.agendaaluno.cursoandroid.agendaaluno;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
@@ -69,14 +70,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
 
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+
+        String site = aluno.getEndereco();
+        if (!site.startsWith("http://")){
+            site = "http://" + aluno.getSite();
+        }
+        MenuItem itemSite = menu.add("Visitar site");
+        Intent intentSite = new Intent(Intent.ACTION_VIEW);
+        intentSite.setData(Uri.parse(site));
+        itemSite.setIntent(intentSite);
+
+
+        MenuItem itemSms = menu.add("Enviar mensagem");
+        Intent intentSms = new Intent(Intent.ACTION_VIEW);
+        intentSms.setData(Uri.parse("sms" + aluno.getTelefone()));
+        itemSms.setIntent(intentSms);
+
+
+        MenuItem itemMapa = menu.add("Achar endereço");
+        Intent itentMapa = new Intent(Intent.ACTION_VIEW);
+        itentMapa.setData(Uri.parse("geo:0,0?q=" + aluno.getEndereco()));
+        itemMapa.setIntent(itentMapa);
+
         MenuItem deletar = menu.add("Deletar");
         deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener(){
 
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
 
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(info.position);
+
 
 
                 AlunoDAO dao = new AlunoDAO(MainActivity.this);

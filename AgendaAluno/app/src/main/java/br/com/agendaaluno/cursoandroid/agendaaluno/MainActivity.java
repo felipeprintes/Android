@@ -1,8 +1,11 @@
 package br.com.agendaaluno.cursoandroid.agendaaluno;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.List;
+import java.util.jar.Manifest;
 
 import br.com.agendaaluno.cursoandroid.agendaaluno.dao.AlunoDAO;
 import br.com.agendaaluno.cursoandroid.agendaaluno.modelo.Aluno;
@@ -81,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
         Intent intentSite = new Intent(Intent.ACTION_VIEW);
         intentSite.setData(Uri.parse(site));
         itemSite.setIntent(intentSite);
+
+        MenuItem itemLigar = menu.add("Ligar");
+        itemLigar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+
+                if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+
+
+                    ActivityCompat.requestPermissions(MainActivity.this, Manifest.permission.CALL_PHONE, new String[]{Manifest.permisison.CALL_PHONE}, 123);
+
+                }else{
+                    Intent intentLigar = new Intent(Intent.ACTION_CALL);
+                    intentLigar.setData(Uri.parse("tel: " + aluno.getTelefone()));
+                    startActivity(intentLigar);
+                }
+
+                return false;
+            }
+        });
+
 
 
         MenuItem itemSms = menu.add("Enviar mensagem");

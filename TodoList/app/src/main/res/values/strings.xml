@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">To do List</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="adicionar">Adicionar</string>
+</resources>

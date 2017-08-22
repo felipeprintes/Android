@@ -3,6 +3,7 @@
     package="br.com.agendaaluno.cursoandroid.agendaaluno">
 
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"

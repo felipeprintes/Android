@@ -32,10 +32,10 @@ public class AlunoDAO extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 
         String sql = "";
-        switch(i){
+        switch(oldVersion){
             case 1:
                 sql = "ALTER TABLE Alunos ADD COLUMN caminhoFoto TEXT";
                 sqLiteDatabase.execSQL(sql);
@@ -60,7 +60,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         dados.put("endereco", aluno.getEndereco());
         dados.put("telefone", aluno.getTelefone());
         dados.put("site", aluno.getSite());
-        dados.put("nota", aluno.getSite());
+        dados.put("nota", aluno.getNota());
         dados.put("caminhoFoto", aluno.getCaminhoFoto());
         return dados;
     }

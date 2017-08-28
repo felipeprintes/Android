@@ -1,13 +1,14 @@
 package br.com.agendaaluno.cursoandroid.agendaaluno.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 import java.util.List;
 
+import br.com.agendaaluno.cursoandroid.agendaaluno.R;
 import br.com.agendaaluno.cursoandroid.agendaaluno.modelo.Aluno;
 
 /**
@@ -41,9 +42,11 @@ public class AlunosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        TextView view = new TextView(context);
         Aluno aluno = alunos.get(position);
-        view.setText(aluno.toString());
+
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.list_item, null);
+
         return view;
     }
 
